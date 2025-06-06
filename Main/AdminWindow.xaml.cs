@@ -28,11 +28,12 @@ namespace Main
 
         private void Loaded(object sender, RoutedEventArgs e)
         {
-            Frame adminFrame = new Frame();
-            adminFrame.Name = "AdminPage";
-            MainWindow.Children.Clear();
-            MainWindow.Children.Add(adminFrame);
-            adminFrame.Navigate(new AdminDashboard());
+            //Frame adminFrame = new Frame();
+            //adminFrame.Name = "AdminPage";
+            //MainWindow.Children.Clear()
+            //MainWindow.Children.Add(adminFrame);
+            //adminFrame.Navigate(new AdminDashboard());
+            MainWindow.Navigate(new Uri("/Pages/AdminDashboard.xaml", UriKind.Relative));
         }
     }
 }

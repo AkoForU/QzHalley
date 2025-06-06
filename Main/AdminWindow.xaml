@@ -179,7 +179,11 @@
         <DockPanel Grid.Column="1" Background="White" Loaded="Loaded"/>
 
         <!-- Dashboard Content -->
-        <Grid x:Name="MainWindow" Grid.Column="1" Margin="15" Visibility="Visible">
-        </Grid>
+        <Frame x:Name="MainWindow" 
+                   Grid.Column="1" 
+                   Margin="15" 
+                   NavigationUIVisibility="Hidden" 
+                   Panel.ZIndex="1"/>
+        <!-- Added Panel.ZIndex -->
     </Grid>
 </Window>

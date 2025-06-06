@@ -27,8 +27,10 @@ namespace Main
 
         private void UserAddBtn_Click(object sender, RoutedEventArgs e)
         {
-            LoginRegisterWindow register = new LoginRegisterWindow(false);
-            register.Show();
+            this.NavigationService.Navigate(new Uri("/Pages/UsersOverviewPage.xaml", UriKind.Relative));
+            //LoginRegisterWindow register = new LoginRegisterWindow(false);
+            //register.Title = "AddUser";
+            //register.ShowDialog();
         }
     }
 }

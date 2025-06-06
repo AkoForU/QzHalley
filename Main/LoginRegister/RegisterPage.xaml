@@ -253,7 +253,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1.5*"/>
                 <RowDefinition/>
-                <RowDefinition Height="1.1*"/>
+                <RowDefinition Height="1.1* "/>
                 <RowDefinition Height="1.5*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Vertical">

@@ -18,9 +18,9 @@ namespace Main
     /// <summary>
     /// Interaction logic for AddQuizPage.xaml
     /// </summary>
-    public partial class AddQuizPage : Page
+    public partial class CheckQuizPage : Page
     {
-        public AddQuizPage()
+        public CheckQuizPage()
         {
             InitializeComponent();
         }
