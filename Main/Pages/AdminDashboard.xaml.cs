@@ -32,5 +32,10 @@ namespace Main
             //register.Title = "AddUser";
             //register.ShowDialog();
         }
+
+        private void QuizCheckBtnClick(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("/Pages/CheckQuizPage.xaml", UriKind.Relative));
+        }
     }
 }

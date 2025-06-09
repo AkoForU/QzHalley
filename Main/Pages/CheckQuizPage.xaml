@@ -8,7 +8,174 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddQuizPage">
 
-    <Grid>
-        
+    <Page.Resources>
+        <!-- Style for Dashboard Cards -->
+        <Style x:Key="DashboardCardStyle" TargetType="{x:Type Border}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Margin" Value="20,0,5,50"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Gray" ShadowDepth="3" BlurRadius="5" Opacity="0.3"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Style for Action Buttons -->
+        <Style x:Key="ActionButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FFCC0415"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Cascadia Code"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFDD1526"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Style for Text Blocks -->
+        <Style x:Key="StatTextStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="Cascadia Code"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="#FF4A4848"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <!-- Updated ButtonNoHighLight Style -->
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <Style x:Key="ButtonNoHighLight" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid x:Name="QuizCheckGrid" Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Text="Welcome, Admin!" Grid.Column="0" Grid.Row="0" Style="{StaticResource StatTextStyle}" FontSize="18" FontWeight="Bold" Foreground="#FFCC0415" Margin="10"/>
+        <TextBlock Text="Check Quiz" Grid.Column="1" Grid.Row="0" Style="{StaticResource StatTextStyle}" FontSize="20" FontWeight="Black" Margin="10" HorizontalAlignment="Right"/>
+
+        <!-- Quiz Actions -->
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical">
+            <Border Style="{StaticResource DashboardCardStyle}">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Quiz Actions" Style="{StaticResource StatTextStyle}" FontWeight="Bold"/>
+                    <Button Content="Add Question" Style="{StaticResource ActionButtonStyle}" Click="AddQuestionBtn_Click">
+                        <Button.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Images/icons/Add.png" Height="20" Margin="0,0,5,0"/>
+                                    <TextBlock Text="Add Question"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </Button.ContentTemplate>
+                    </Button>
+                    <Button Content="Edit Question" Style="{StaticResource ActionButtonStyle}" Click="EditQuestionBtn_Click">
+                        <Button.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Images/icons/Settings.png" Height="20" Margin="0,0,5,0"/>
+                                    <TextBlock Text="Edit Question"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </Button.ContentTemplate>
+                    </Button>
+                    <Button Content="Delete Question" Style="{StaticResource ActionButtonStyle}" Click="DeleteQuestionBtn_Click">
+                        <Button.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Images/icons/Delete.png" Height="20" Margin="0,0,5,0"/>
+                                    <TextBlock Text="Delete Question"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </Button.ContentTemplate>
+                    </Button>
+                    <Button Content="Back" Style="{StaticResource ActionButtonStyle}" Click="Back_Click">
+                        <Button.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Images/icons/Back.png" Height="20" Margin="0,0,5,0"/>
+                                    <TextBlock Text="Back"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </Button.ContentTemplate>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <!-- Questions Table -->
+        <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource DashboardCardStyle}" MaxWidth="600">
+            <StackPanel>
+                <TextBlock Text="Quiz Questions" Style="{StaticResource StatTextStyle}" FontWeight="Bold"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MaxHeight="278">
+                    <DataGrid x:Name="QuestionsDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" SelectionMode="Single" ItemsSource="{Binding Questions}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" Width="40" Visibility="Collapsed"/>
+                            <DataGridTextColumn Header="Question Text" Binding="{Binding QuestionText}" IsReadOnly="True" Width="150"/>
+                            <DataGridTextColumn Header="Option 1" Binding="{Binding Option1}" IsReadOnly="True" Width="100"/>
+                            <DataGridTextColumn Header="Option 2" Binding="{Binding Option2}" IsReadOnly="True" Width="100"/>
+                            <DataGridTextColumn Header="Option 3" Binding="{Binding Option3}" IsReadOnly="True" Width="100"/>
+                            <DataGridTextColumn Header="Option 4" Binding="{Binding Option4}" IsReadOnly="True" Width="100"/>
+                            <DataGridTextColumn Header="Correct Answer" Binding="{Binding CorrectAnswer}" IsReadOnly="True" Width="100"/>
+                            <DataGridTextColumn Header="Options Count" Binding="{Binding OptionsCount}" IsReadOnly="True" Width="100"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>

@@ -113,12 +113,12 @@
             <Border Style="{StaticResource DashboardCardStyle}">
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Quiz Actions" Style="{StaticResource StatTextStyle}" FontWeight="Bold"/>
-                    <Button Content="Create New Quiz" Style="{StaticResource ActionButtonStyle}" >
+                    <Button Content="Create New Quiz" Style="{StaticResource ActionButtonStyle}" Click="QuizCheckBtnClick">
                         <Button.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="/Images/icons/Add.png" Height="20" Margin="0,0,5,0"/>
-                                    <TextBlock Text="Create New Quiz"/>
+                                    <TextBlock Text="Check Quizzes"/>
                                 </StackPanel>
                             </DataTemplate>
                         </Button.ContentTemplate>
