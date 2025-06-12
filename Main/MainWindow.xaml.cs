@@ -1,4 +1,6 @@
 ﻿
+using Main.Models;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +22,11 @@ namespace Main
         public MainWindow()
         {
             InitializeComponent();
+            if (!Directory.Exists("../../../../db"))
+            {
+                Directory.CreateDirectory("../../../../db");
+            }
+            new QuizDbContext().Database.EnsureCreated();
             ResizeMode = ResizeMode.NoResize;
             WindowStartupLocation =WindowStartupLocation.CenterScreen;
         }
