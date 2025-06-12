@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Main.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,36 +22,51 @@ namespace Main
     /// </summary>
     public partial class RegisterPage : Page
     {
+        QuizDbContext _context;
         LoginRegisterWindow loginRegisterWindow;
         public RegisterPage(LoginRegisterWindow tmp)
         {
             InitializeComponent();
             loginRegisterWindow = tmp;
+            _context=new QuizDbContext();
         }
-
-        private void ShowPassword_Checked(object sender, RoutedEventArgs e)
-        {
-            passwordTxtBox.Text = passwordBox.Password;
-            passwordTxtBoxRepeat.Text = passwordBoxRepeat.Password;
-            passwordBox.Visibility = Visibility.Collapsed;
-            passwordTxtBox.Visibility = Visibility.Visible;
-            passwordBoxRepeat.Visibility = Visibility.Collapsed;
-            passwordTxtBoxRepeat.Visibility = Visibility.Visible;
-        }
-
-        private void ShowPassword_Unchecked(object sender, RoutedEventArgs e)
-        {
-            passwordBox.Password = passwordTxtBox.Text;
-            passwordBoxRepeat.Password = passwordTxtBoxRepeat.Text;
-            passwordTxtBox.Visibility = Visibility.Collapsed;
-            passwordBox.Visibility = Visibility.Visible;
-            passwordBoxRepeat.Visibility = Visibility.Visible;
-            passwordTxtBoxRepeat.Visibility = Visibility.Collapsed;
-        }
-
         private void BackButton(object sender, RoutedEventArgs e)
         {
             loginRegisterWindow.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (usrntxtbx.Text == string.Empty || usrntxtbx.Text.Contains(" "))
+            {
+                MessageBox.Show("Invalid Username");
+            }
+            else if (_context.Users.Any(e => e.Name == usrntxtbx.Text))
+            {
+                MessageBox.Show("The username is already used");
+            }
+            else if (passwordTxtBox.Text != passwordTxtBoxRepeat.Text)
+            {
+                MessageBox.Show("Passwords doesn't match");
+            }
+            else
+            {
+                if (passwordTxtBox.Text == string.Empty && passwordTxtBox.Text == string.Empty)
+                { MessageBox.Show("The password doesn't need to be empty"); }
+                else
+                {
+                    _context.Users.Add(new User
+                    {
+                        Name = usrntxtbx.Text,
+                        Password = passwordTxtBox.Text,
+                        Score = "null",
+                        Created = DateTime.Now,
+                        CompletedQuiz = null
+                    });
+                    _context.SaveChanges();
+                    MessageBox.Show("User added with succes");
+                }
+            }
         }
     }
 }

@@ -109,8 +109,11 @@
                     <TextBox x:Name="CorrectAnswerTextBox" Height="30" Margin="0,2,0,5"/>
                     <TextBlock Text="Image (Optional):" Style="{StaticResource StatTextStyle}"/>
                     <Button x:Name="SelectImageButton" Content="Select Image" Style="{StaticResource ActionButtonStyle}" Click="SelectImageButton_Click" Margin="0,2,0,5"/>
-                    <Image x:Name="ImagePreview" Height="100" Margin="0,5,0,10" Stretch="Uniform"/>
-                    <Button Content="Save Question" Style="{StaticResource ActionButtonStyle}" Click="SaveQuestion_Click" HorizontalAlignment="Right" Margin="0,10,0,0"/>
+                    <Image x:Name="ImagePreview" Height="100" Margin="0,5,0,10" Stretch="Uniform" Visibility="Collapsed"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button x:Name="RemoveImageButton" Content="Remove Image" Style="{StaticResource ActionButtonStyle}" Click="RemoveImageButton_Click" Margin="0,10,10,0" Visibility="Collapsed"/>
+                        <Button Content="Save Question" Style="{StaticResource ActionButtonStyle}" Click="SaveQuestion_Click" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+                    </StackPanel>
                 </StackPanel>
             </ScrollViewer>
         </Border>

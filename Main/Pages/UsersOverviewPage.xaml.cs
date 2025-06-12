@@ -21,26 +21,16 @@ namespace Main.Pages
     /// </summary>
     public partial class UsersOverviewPage : Page
     {
-        private List<User> users;
+        QuizDbContext _context;
         public UsersOverviewPage()
         {
             InitializeComponent();
+            _context = new QuizDbContext();
             LoadUsers();
         }
         private void LoadUsers()
         {
-            // Temporary array of users for demonstration
-            users = new List<User>
-            {
-                new User { Id = 1, Name = "John Doe", Password = "johnpass123", Score = "85" },
-                new User { Id = 2, Name = "Alice Smith", Password = "alicepass456", Score = "null" },
-                new User { Id = 3, Name = "Bob Johnson", Password = "bobpass789", Score = "92" },
-                new User { Id = 4, Name = "Emma Wilson", Password = "emmapass101", Score = "78" },
-                new User { Id = 5, Name = "Michael Brown", Password = "michaelpass202", Score = "null" }
-            };
-
-            // Bind the users to the DataGrid
-            UsersDataGrid.ItemsSource = users;
+            UsersDataGrid.ItemsSource = _context.Users.ToArray();
         }
 
         private void AddUser_Click(object sender, RoutedEventArgs e)
@@ -50,6 +40,7 @@ namespace Main.Pages
             LoginRegisterWindow register = new LoginRegisterWindow(false);
             register.Title = "AddUser";
             register.ShowDialog();
+            LoadUsers();
         }
 
         private void DeleteUser_Click(object sender, RoutedEventArgs e)
@@ -64,11 +55,11 @@ namespace Main.Pages
                 if (result == MessageBoxResult.Yes)
                 {
                     // Remove the user from the list
-                    users.Remove(selectedUser);
-
+                    _context.Users.Remove(selectedUser);
+                    _context.SaveChanges();
                     // Refresh the DataGrid
                     UsersDataGrid.ItemsSource = null;
-                    UsersDataGrid.ItemsSource = users;
+                    UsersDataGrid.ItemsSource = _context.Users.ToList();
 
                     MessageBox.Show($"User '{selectedUser.Name}' deleted successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 }

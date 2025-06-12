@@ -123,12 +123,12 @@
                             </DataTemplate>
                         </Button.ContentTemplate>
                     </Button>
-                    <Button Style="{StaticResource ActionButtonStyle}">
+                    <Button Style="{StaticResource ActionButtonStyle}" Click="Button_Click">
                         <Button.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="/Images/icons/Settings.png" Height="20" Margin="0,0,5,0"/>
-                                    <TextBlock Text="Settings"/>
+                                    <Image Source="/Images/icons/Report.png" Height="20" Margin="0,0,5,0"/>
+                                    <TextBlock Text="Status"/>
                                 </StackPanel>
                             </DataTemplate>
                         </Button.ContentTemplate>
@@ -151,14 +151,14 @@
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
             <Border Style="{StaticResource DashboardCardStyle}">
                 <StackPanel>
-                    <TextBlock Text="Total Quizzes" Style="{StaticResource StatTextStyle}"/>
-                    <TextBlock Text="0" Style="{StaticResource StatTextStyle}" FontSize="24" FontWeight="Bold"/>
+                    <TextBlock Text="Total Questions" Style="{StaticResource StatTextStyle}"/>
+                    <TextBlock x:Name="ttlqts" Text="0" Style="{StaticResource StatTextStyle}" FontSize="24" FontWeight="Bold"/>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource DashboardCardStyle}">
                 <StackPanel>
                     <TextBlock Text="Total Users" Style="{StaticResource StatTextStyle}"/>
-                    <TextBlock Text="0" Style="{StaticResource StatTextStyle}" FontSize="24" FontWeight="Bold"/>
+                    <TextBlock x:Name="ttlusr" Text="0" Style="{StaticResource StatTextStyle}" FontSize="24" FontWeight="Bold"/>
                 </StackPanel>
             </Border>
         </StackPanel>
@@ -167,8 +167,8 @@
         <Border Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource DashboardCardStyle}" MaxWidth="600">
             <StackPanel>
                 <TextBlock Text="Recent Quiz Activity" Style="{StaticResource StatTextStyle}" FontWeight="Bold"/>
-                <TextBlock Text="User 'tmp' created at 00:00" Style="{StaticResource StatTextStyle}"/>
-                <TextBlock Text="Quiz 'Halley' completed at 00:00 with score 90%" Style="{StaticResource StatTextStyle}"/>
+                <TextBlock x:Name="logUsers" Text="User 'tmp' created at 00:00" Style="{StaticResource StatTextStyle}"/>
+                <TextBlock x:Name="logQuiz" Text="Quiz 'Halley' completed at 00:00 with score 90%" Style="{StaticResource StatTextStyle}"/>
             </StackPanel>
         </Border>
     </Grid>

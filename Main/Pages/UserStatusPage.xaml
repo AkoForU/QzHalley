@@ -1,0 +1,191 @@
+﻿<Page x:Class="Main.Pages.UserStatusPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Main.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UserStatusPage">
+
+    <Page.Resources>
+        <!-- Enhanced Dashboard Card Style with a cooler gradient -->
+        <Style x:Key="DashboardCardStyle" TargetType="{x:Type Border}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#FFF5F7FA" Offset="0"/>
+                        <GradientStop Color="#FFEFF2F5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="Margin" Value="20,0,5,50"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Red" ShadowDepth="5" BlurRadius="10" Opacity="0.5"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Enhanced Action Button Style with neon effect -->
+        <Style x:Key="ActionButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="Red"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Cascadia Code"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkRed"/>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="15" Opacity="0.8"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Enhanced Stat Text Style with a modern font and color scheme -->
+        <Style x:Key="StatTextStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="FontFamily" Value="Cascadia Code"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="DarkRed"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+        </Style>
+
+        <!-- New Go Back Button Style -->
+        <Style x:Key="GoBackButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource ActionButtonStyle}">
+            <Setter Property="Background" Value="Red"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="10,0,0,0"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkRed"/>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="15" Opacity="0.8"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- New ComboBox Style matching the palette -->
+        <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
+            <Setter Property="Background" Value="#FFF5F7FA"/>
+            <Setter Property="Foreground" Value="#FF2E4057"/>
+            <Setter Property="FontFamily" Value="Cascadia Code"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="5,0,0,0"/>
+            <Setter Property="BorderBrush" Value="Red"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                <ToggleButton x:Name="ToggleButton" Grid.Column="2" Focusable="false" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press">
+                                    <ToggleButton.Template>
+                                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                            <Border Background="Transparent">
+                                                <Path x:Name="Arrow" Data="M0,0 L4,4 L8,0 Z" Fill="Red" HorizontalAlignment="Right" VerticalAlignment="Center" Width="8" Height="4" Margin="0,0,5,0"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </ToggleButton.Template>
+                                </ToggleButton>
+                            </Border>
+                            <Popup x:Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Slide">
+                                <Border x:Name="DropDownBorder" Background="#FFF5F7FA" BorderBrush="Red" BorderThickness="1" CornerRadius="5">
+                                    <ScrollViewer x:Name="DropDownScrollViewer">
+                                        <ItemsPresenter/>
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#FFEFF2F5"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="DarkRed"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header with Gradient -->
+        <Border Grid.Row="0" Background="Red" CornerRadius="10" Padding="10">
+            <TextBlock Text="User Status" Style="{StaticResource StatTextStyle}" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+        </Border>
+
+        <!-- Filter, Controls, and Output -->
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,10">
+                <TextBlock Text="Filter by User:" Style="{StaticResource StatTextStyle}" VerticalAlignment="Center"/>
+                <ComboBox x:Name="UserFilterComboBox" Width="200" Margin="5,0,0,0" SelectionChanged="UserFilterComboBox_SelectionChanged" 
+                          Style="{StaticResource ComboBoxStyle}"/>
+                <Button x:Name="StartServerButton" Content="Start Server" Style="{StaticResource ActionButtonStyle}" Click="StartServerButton_Click" Margin="10,0,0,0"/>
+                <Button x:Name="StopServerButton" Content="Stop Server" Style="{StaticResource ActionButtonStyle}" Click="StopServerButton_Click" Margin="5,0,0,0" IsEnabled="False"/>
+                <Button x:Name="refresh" Style="{StaticResource ActionButtonStyle}" Click="RefreshButton_Click" Margin="5,0,0,0">
+                    <Image Source="/Images/icons/refresh.png" Stretch="Uniform" Height="14" Width="30"/>
+                </Button>
+            </StackPanel>
+
+            <!-- User Results Grid with Scroll -->
+            <Border Style="{StaticResource DashboardCardStyle}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="200">
+                    <DataGrid x:Name="UserResultsGrid" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" 
+                              RowBackground="#FFF5F7FA" AlternatingRowBackground="#FFEFF2F5" BorderBrush="Red" BorderThickness="1">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Username" Binding="{Binding User.Name}" FontFamily="Cascadia Code" FontSize="14" Foreground="#FF2E4057"/>
+                            <DataGridTextColumn Header="Question Text" Binding="{Binding Question.QuestionText}" FontFamily="Cascadia Code" FontSize="14" Foreground="#FF2E4057"/>
+                            <DataGridTextColumn Header="User ID" Visibility="Collapsed" Binding="{Binding UserId}" FontFamily="Cascadia Code" FontSize="14" Foreground="#FF2E4057"/>
+                            <DataGridTextColumn Header="Question ID" Visibility="Collapsed" Binding="{Binding QuestionId}" FontFamily="Cascadia Code" FontSize="14" Foreground="#FF2E4057"/>
+                            <DataGridTextColumn Header="Selected Option" Binding="{Binding SelectedOption}" FontFamily="Cascadia Code" FontSize="14" Foreground="#FF2E4057"/>
+                            <DataGridTextColumn Header="Correct" Binding="{Binding IsCorrect, StringFormat={}{0}}" FontFamily="Cascadia Code" FontSize="14" Foreground="#FF2E4057"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
+            </Border>
+        </StackPanel>
+
+        <!-- Go Back Button -->
+        <Button x:Name="GoBackButton" Content="Go Back" Style="{StaticResource GoBackButtonStyle}" Grid.Row="2" Click="GoBackButton_Click"/>
+    </Grid>
+</Page>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Main"
         mc:Ignorable="d"
-        Title="AdminPage" Height="450" Width="800" Icon="/Images/halley.ico">
+        Title="AdminPage" Height="450" Width="800" Icon="/Images/halley.ico" Closed="Window_Closed">
     <Window.Resources>
         <!-- Style for Sidebar Buttons -->
         <Style x:Key="SidebarButtonStyle" TargetType="{x:Type Button}">
@@ -115,8 +115,9 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.15*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="104*"/>
+            <ColumnDefinition Width="607*"/>
+            <ColumnDefinition Width="89*"/>
         </Grid.ColumnDefinitions>
 
         <!-- Sidebar -->
@@ -176,14 +177,14 @@
         </DockPanel>
 
         <!-- Main Dashboard -->
-        <DockPanel Grid.Column="1" Background="White" Loaded="Loaded"/>
+        <DockPanel Background="White" Loaded="Loaded" Grid.ColumnSpan="3" Margin="104,0,0,0"/>
 
         <!-- Dashboard Content -->
         <Frame x:Name="MainWindow" 
                    Grid.Column="1" 
-                   Margin="15" 
+                   Margin="15,15,15,15" 
                    NavigationUIVisibility="Hidden" 
-                   Panel.ZIndex="1"/>
+                   Panel.ZIndex="1" Grid.ColumnSpan="2"/>
         <!-- Added Panel.ZIndex -->
     </Grid>
 </Window>

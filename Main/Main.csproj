@@ -16,6 +16,8 @@
     <None Remove="Images\icons\Delete.png" />
     <None Remove="Images\icons\Home.png" />
     <None Remove="Images\icons\Info.png" />
+    <None Remove="Images\icons\Refresh.png" />
+    <None Remove="Images\icons\Report.png" />
     <None Remove="Images\icons\Settings.png" />
     <None Remove="Images\icons\user.png" />
   </ItemGroup>
@@ -29,6 +31,8 @@
       <CopyToOutputDirectory></CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\icons\Info.png" />
+    <Resource Include="Images\icons\Refresh.png" />
+    <Resource Include="Images\icons\Report.png" />
     <Resource Include="Images\icons\Settings.png">
       <CopyToOutputDirectory></CopyToOutputDirectory>
     </Resource>
@@ -42,7 +46,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="qzphotos\" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

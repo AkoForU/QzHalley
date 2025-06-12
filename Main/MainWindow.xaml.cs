@@ -28,8 +28,8 @@ namespace Main
         {
             LoginRegisterWindow login=new LoginRegisterWindow(true);
             login.Title = "Login";
-            login.Show();
             this.Close();
+            login.Show();
         }
     }
 }

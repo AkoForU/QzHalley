@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Main.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace Main
     /// </summary>
     public partial class AdminWindow : Window
     {
+        QuizDbContext _context =new QuizDbContext();
         public AdminWindow()
         {
             InitializeComponent();
@@ -33,7 +35,18 @@ namespace Main
             //MainWindow.Children.Clear()
             //MainWindow.Children.Add(adminFrame);
             //adminFrame.Navigate(new AdminDashboard());
-            MainWindow.Navigate(new Uri("/Pages/AdminDashboard.xaml", UriKind.Relative));
+            MainWindow.Navigate(new AdminDashboard());
+            _context.Database.EnsureCreated();
         }
-    }
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            // Ensure base cleanup is performed
+        }
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            _context.Dispose();
+            Application.Current.Shutdown();
+        }
+    }   
 }

@@ -18,8 +18,20 @@ namespace Main
     /// <summary>
     /// Interaction logic for LoginPage.xaml
     /// </summary>
+    
     public partial class LoginPage : Page
     {
+        static string sha256(string randomString)
+        {
+            var crypt = new System.Security.Cryptography.SHA256Managed();
+            var hash = new System.Text.StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(randomString));
+            foreach (byte theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+            return hash.ToString();
+        }
         LoginRegisterWindow loginRegisterWindow;
         public LoginPage(LoginRegisterWindow tmp)
         {
@@ -42,10 +54,16 @@ namespace Main
 
         private void AuthenticateButton_Click(object sender, RoutedEventArgs e)
         {
-            //this is only temporary, rememba to delete this, u need to make a secure authenticator
-            AdminWindow adminWindow = new AdminWindow();
-            adminWindow.Show();
-            loginRegisterWindow.Close();
+            if (usrntxtbx.Text != "admin" || (sha256(passwordTxtBox.Text) != "678a7e594c0d7963619b3975f7814b40e081937b417bf8734e1e6b7b83763a36") && sha256(passwordBox.Password) != "678a7e594c0d7963619b3975f7814b40e081937b417bf8734e1e6b7b83763a36")
+            {
+                MessageBox.Show("The password or the username is wrong");
+            }
+            else
+            {
+                AdminWindow adminWindow = new AdminWindow();
+                loginRegisterWindow.Close();
+                adminWindow.Show();
+            }
         }
     }
 }

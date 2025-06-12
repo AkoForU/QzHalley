@@ -320,21 +320,18 @@
                     <StackPanel>
                         <TextBlock Style="{DynamicResource TextBlockSmall}" Text="Password"/>
                         <Grid>
-                            <PasswordBox x:Name="passwordBox" Width="200" Style="{DynamicResource PasswordBoxStyle}" PasswordChar="*" Margin="0,5,50,0" />
-                            <TextBox x:Name="passwordTxtBox" Width="200" Visibility="Collapsed" Style="{DynamicResource InputText}" Margin="0,5,50,0" />
+                            <TextBox x:Name="passwordTxtBox" Width="200" Visibility="Visible" Style="{DynamicResource InputText}" Margin="0,5,50,0" />
                         </Grid>
                     </StackPanel>
                     <StackPanel>
                         <TextBlock Style="{DynamicResource TextBlockSmall}" Text="Confirm Password" Margin="-10,0,0,0"/>
                         <Grid>
-                            <PasswordBox x:Name="passwordBoxRepeat" Width="200" Style="{DynamicResource PasswordBoxStyle}" PasswordChar="*" Margin="-10,5,50,0" />
-                            <TextBox x:Name="passwordTxtBoxRepeat" Width="200" Visibility="Collapsed" Style="{DynamicResource InputText}" Margin="-10,5,50,0" />
+                            <TextBox x:Name="passwordTxtBoxRepeat" Width="200" Visibility="Visible" Style="{DynamicResource InputText}" Margin="-10,5,50,0" />
                         </Grid>
                     </StackPanel>
                 </StackPanel>
-                <CheckBox Margin="10" Name="showPassword" Unchecked="ShowPassword_Unchecked"  Checked="ShowPassword_Checked" Content="Show Password" Style="{DynamicResource ChechBoxText}"/>
             </StackPanel>
-            <Button Grid.Row="3" Margin="0,20,300,50" Style="{DynamicResource RoundButtons}" Content="Add User" Height="45"/>
+            <Button Grid.Row="3" Margin="0,20,300,50" Style="{DynamicResource RoundButtons}" Content="Add User" Height="45" Click="Button_Click"/>
         </Grid>
     </Grid>
 </Page>
