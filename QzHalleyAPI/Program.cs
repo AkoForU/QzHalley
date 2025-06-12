@@ -44,6 +44,9 @@ string GetLocalIPAddress()
 }
 var logger = app.Services.GetRequiredService<ILogger<Program>>();
 logger.LogInformation($"Server starting... Local IP Address: {GetLocalIPAddress()}");
+if (!Directory.Exists("images")) { 
+    Directory.CreateDirectory("images"); logger.LogInformation("Welcome to the app boss, this app was made by Ako, " +
+    "akoforu on discord, ll005.007.006 on instagram, and enjoy"); }
 
 // Serve static files
 app.UseStaticFiles(new StaticFileOptions
