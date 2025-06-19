@@ -32,11 +32,16 @@ from the project directory after building to start the application directly.
     Client: Ensure the server is running, then use the client application to authenticate and start a quiz. Results will be displayed upon completion.
 
 ## Notes
-
-    The server must be running on the local network (e.g., IP 192.168.1.1:5000) for the client to connect.
-    For detailed setup, refer to the console output for server IP and port information.
-    And don't change the location of the exe file, leave it being in the bin and releases as its using relative path
-
+```
+The server must be running on the local network (e.g., IP 192.168.1.1:5000) for the client to connect.
+For detailed setup, refer to the console output for server IP and port information.
+And don't change the location of the exe file, leave it being in the bin and releases as its using relative path
+```
+```
+To authenticate use:
+Username:admin
+Password:adminhalley
+```
 ## Contributing
 Feel free to fork this repository, submit issues, or create pull requests to improve QzHalley. Contributions are welcome!
 
